@@ -7,10 +7,9 @@ import { TestBed, inject } from '@angular/core/testing';
 import { _do } from 'rxjs/operator/do';
 import { take } from 'rxjs/operator/take';
 import { skip } from 'rxjs/operator/skip';
-import { FirebaseApp, FirebaseAppConfig, AngularFireModule } from '../angularfire2';
-import { AngularFireAuth } from './auth';
-import { AngularFireAuthModule } from './auth.module';
-import { COMMON_CONFIG } from '../test-config';
+import { FirebaseApp, FirebaseAppConfig, AngularFireModule } from 'angularfire2';
+import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
+import { COMMON_CONFIG } from './test-config';
 
 function authTake(auth: Observable<any>, count: number): Observable<any> {
   return take.call(auth, 1);
@@ -46,8 +45,8 @@ describe('AngularFireAuth', () => {
     mockAuthState = new Subject<firebase.User>();
     spyOn(afAuth, 'authState').and.returnValue(mockAuthState);
     spyOn(afAuth, 'idToken').and.returnValue(mockAuthState);
-    afAuth.authState = mockAuthState;
-    afAuth.idToken = mockAuthState;
+    afAuth.authState = mockAuthState as Observable<firebase.User>;
+    afAuth.idToken = mockAuthState as Observable<firebase.User>;
   });
 
   afterEach(done => {
@@ -90,9 +89,8 @@ describe('AngularFireAuth', () => {
 
     // Check that the first value is null and second is the auth user
     const subs = afAuth.authState.subscribe(user => {
-      console.log('What...', count, user);
       if (count === 0) {
-        expect(user).toBe(null);
+        expect(user).toBe(null!);
         count = count + 1;
         mockAuthState.next(firebaseUser);
       } else {
@@ -101,8 +99,7 @@ describe('AngularFireAuth', () => {
         done();
       }
     }, done, done.fail);
-    console.log('....!?');
-    mockAuthState.next(null);
+    mockAuthState.next(null!);
   });
 
   it('should emit auth updates through idToken', (done: any) => {
@@ -110,9 +107,8 @@ describe('AngularFireAuth', () => {
     
     // Check that the first value is null and second is the auth user
     const subs = afAuth.idToken.subscribe(user => {
-      console.log("HI!....", count, user);
       if (count === 0) {
-        expect(user).toBe(null);
+        expect(user).toBe(null!);
         count = count + 1;
         mockAuthState.next(firebaseUser);
       } else {
@@ -121,7 +117,7 @@ describe('AngularFireAuth', () => {
         done();
       }
     }, done, done.fail);
-    mockAuthState.next(null);
+    mockAuthState.next(null!);
   });
 
 });

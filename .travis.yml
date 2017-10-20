@@ -1,26 +1,24 @@
 language: node_js
 sudo: false
 node_js:
-- '6'
+- 'node'
 
 addons:
-  firefox: latest
+  chrome: stable
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
 
-cache:
-  directories:
-    - node_modules
+cache: npm
 
 env:
   - CXX=g++-4.8
 
 install:
-  - npm install -g yarn
-  - yarn install
+  # ditched yarn, since it was acting up and giving old versions of tsc
+  - npm install
 
 before_script:
   - export DISPLAY=:99.0
@@ -28,13 +26,9 @@ before_script:
 
 script:
   - npm run build
-  - ./node_modules/.bin/karma start --single-run --browsers Firefox --reporters mocha
-  # Make sure the build that ships to npm builds without errors
-  - npm run build_npm
+  - ./node_modules/.bin/karma start --single-run --browsers Chrome --reporters mocha
   # Run integration test to make sure our typings are correct for user-land.
   - node tools/run-typings-test.js
-  # Can't run until https://github.com/angular/protractor/issues/2784 is resolved
-  #- ./node_modules/.bin/protractor protractor.conf.js --browser firefox
 
 notifications:
   webhooks:

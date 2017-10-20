@@ -1,3 +1,50 @@
+<a name="5.0.0-rc.3"></a>
+# [5.0.0-rc.3](https://github.com/angular/angularfire2/compare/2.0.0-beta.8...5.0.0-rc.3) (2017-10-14)
+
+
+### Bug Fixes
+
+* **afs:** change doc.update() parameter type to Partial<T> ([#1247](https://github.com/angular/angularfire2/issues/1247)) ([297cabb](https://github.com/angular/angularfire2/commit/297cabb)), closes [#1245](https://github.com/angular/angularfire2/issues/1245) [#1215](https://github.com/angular/angularfire2/issues/1215)
+* **rtdb:** Fixed null set handling, ordering, and cleaned up types ([#1264](https://github.com/angular/angularfire2/issues/1264)) ([eda1c41](https://github.com/angular/angularfire2/commit/eda1c41))
+
+
+<a name="5.0.0-rc.2"></a>
+# [5.0.0-rc.2](https://github.com/angular/angularfire2/compare/5.0.0-rc.0...5.0.0-rc.2) (2017-10-05)
+
+
+### Bug Fixes
+
+* **afs:** Allow multiple subscribers by using share, closes [#1191](https://github.com/angular/angularfire2/issues/1191) ([#1192](https://github.com/angular/angularfire2/issues/1192)) ([21522ab](https://github.com/angular/angularfire2/commit/21522ab))
+* **afs:** Don't filter empty changes (allow for null set) ([eb71edc](https://github.com/angular/angularfire2/commit/eb71edc))
+* **afs:** remove debugger statement from collection/changes.ts ([#1190](https://github.com/angular/angularfire2/issues/1190)) ([88a25e7](https://github.com/angular/angularfire2/commit/88a25e7))
+* **auth:** Clean up the authentication module ([8ab3803](https://github.com/angular/angularfire2/commit/8ab3803))
+
+
+
+<a name="5.0.0-rc.0"></a>
+# [5.0.0-rc.0](https://github.com/angular/angularfire2/compare/4.0.0-rc.2...v5.0.0-rc.0) (2017-10-03)
+
+### Features
+* **AngularFirestore:** Module for Cloud Firestore ([90c8ede](https://github.com/angular/angularfire2/commit/90c8ede))
+* **New AngularFireDatabase API:** New API for the database [#1158](https://github.com/angular/angularfire2/issues/1158)
+
+### Breaking changes
+
+AngularFire 5.0 brings a new API for the Realtime Database. [See the migration doc for converting to the new API](https://github.com/angular/angularfire2/blob/master/docs/version-5-upgrade.md). If you want to stay on the old database API you can use:
+
+```ts
+import { AngularFireModule } from 'angularfire2/database-deprecated';
+```
+
+<a name="4.0.0-rc.1"></a>
+# [4.0.0-rc.1](https://github.com/angular/angularfire2/compare/4.0.0-rc.0...v4.0.0-rc.1) (2017-06-02)
+
+### Breaking changes
+
+* **rc:** Update to Firebase JS SDK 4.0 ([9642f5](https://github.com/angular/angularfire2/commit/9642f589ba73add6d49a5818a1109028f8c7729b))
+
+In version 4.0 of the Firebase SDK `onAuthStateChanged` is only fired on sign-in and sign-out, [see the Firebase JS SDK changelog for more information](https://firebase.google.com/support/release-notes/js#4.0.0). The added `AngularFireAuth.idToken: Observable<firebase.User>` behaves as `authState` used to.
+
 <a name="4.0.0-rc0"></a>
 # [4.0.0-rc0](https://github.com/angular/angularfire2/compare/2.0.0-beta.8...v4.0.0-rc0) (2017-05-02)
 
